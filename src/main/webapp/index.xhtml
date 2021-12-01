@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>TEST JSF</title>
+</h:head>
+
+<h:body>
+	<h:form id="userForm">
+		<p:panel header="Registration Form User" style="width: auto">
+			<h:panelGrid columns="2">
+				<p:inputText id="name" value="#{userManager.userModel.nameUser}"
+					placeholder="Name" />
+
+				<br />
+
+				<p:inputText id="surname"
+					value="#{userManager.userModel.surnameUser}" placeholder="Surname" />
+
+				<br />
+
+				<p:inputText id="email" value="#{userManager.userModel.emailUser}"
+					placeholder="Email" />
+
+				<br />
+
+				<p:inputMask id="age" value="#{userManager.userModel.ageUser}"
+					mask="99" placeholder="Age" />
+
+				<br />
+
+				<p:inputText id="login" value="#{userManager.userModel.loginUser}"
+					placeholder="Login" />
+
+				<br />
+
+				<p:password id="password"
+					value="#{userManager.userModel.passwordUser}"
+					placeholder="Password" />
+
+				<p:outputLabel value="" />
+				<p:commandButton action="#{userManager.saveUser}" value="Save User"
+					update="userForm" />
+
+				<p:outputLabel value="" />
+				<p:commandButton action="#{userManager.newUser}" value="New User"
+					update="userForm" />
+			</h:panelGrid>
+		</p:panel>
+
+		<div class="userList">
+			<p:dataTable value="#{userManager.users}" var="user">
+				<p:column headerText="Name">
+					<h:outputText value="#{user.nameUser}" />
+				</p:column>
+
+				<p:column headerText="Surname">
+					<h:outputText value="#{user.surnameUser}" />
+				</p:column>
+
+				<p:column headerText="Email">
+					<h:outputText value="#{user.emailUser}" />
+				</p:column>
+
+				<p:column headerText="Age">
+					<h:outputText value="#{user.ageUser}" />
+				</p:column>
+
+				<p:column headerText="Login">
+					<h:outputText value="#{user.loginUser}" />
+				</p:column>
+
+				<p:column headerText="Password">
+					<h:outputText value="#{user.passwordUser}" />
+				</p:column>
+
+				<p:column headerText="Edit">
+					<h:commandLink value="Edit">
+						<f:setPropertyActionListener value="#{user}"
+							target="#{userManager.userModel}" />
+					</h:commandLink>
+				</p:column>
+
+				<p:column headerText="Remove">
+					<h:commandLink value="Remove" action="#{userManager.remove}">
+						<f:setPropertyActionListener value="#{user}"
+							target="#{userManager.userModel}" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+		</div>
+	</h:form>
+</h:body>
+</html>
