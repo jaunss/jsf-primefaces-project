@@ -13,47 +13,63 @@
 	<h:form id="userForm">
 		<p:panel header="Registration Form User" style="width: auto">
 			<h:panelGrid columns="2">
-				<p:inputText id="name" value="#{userManager.userModel.nameUser}"
-					placeholder="Name" />
+				<div class="ui-fluid p-formgrid p-grid">
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.nameUser}"
+							placeholder="Name" />
+					</div>
 
-				<br />
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.surnameUser}"
+							placeholder="Surname" />
+					</div>
 
-				<p:inputText id="surname"
-					value="#{userManager.userModel.surnameUser}" placeholder="Surname" />
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.emailUser}"
+							placeholder="Email" />
+					</div>
 
-				<br />
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.ageUser}"
+							placeholder="Age" />
+					</div>
 
-				<p:inputText id="email" value="#{userManager.userModel.emailUser}"
-					placeholder="Email" />
+					<div class="p-field p-col-12 p-md-3">
+						<p:selectOneMenu value="#{userManager.userModel.genderUser}"
+							style="width: 204px">
+							<f:selectItem itemLabel="Select One" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Male" itemValue="MALE" />
+							<f:selectItem itemLabel="Female" itemValue="FEMALE" />
+						</p:selectOneMenu>
+					</div>
 
-				<br />
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.loginUser}"
+							placeholder="Login" />
+					</div>
 
-				<p:inputMask id="age" value="#{userManager.userModel.ageUser}"
-					mask="99" placeholder="Age" />
+					<div class="p-field p-col-12 p-md-3">
+						<p:inputText value="#{userManager.userModel.passwordUser}"
+							placeholder="Password" />
+					</div>
 
-				<br />
+					<div class="p-field p-col-12 p-md-3">
+						<p:commandButton action="#{userManager.saveUser}"
+							value="Save User" update="userForm" />
+					</div>
 
-				<p:inputText id="login" value="#{userManager.userModel.loginUser}"
-					placeholder="Login" />
-
-				<br />
-
-				<p:password id="password"
-					value="#{userManager.userModel.passwordUser}"
-					placeholder="Password" />
-
-				<p:outputLabel value="" />
-				<p:commandButton action="#{userManager.saveUser}" value="Save User"
-					update="userForm" />
-
-				<p:outputLabel value="" />
-				<p:commandButton action="#{userManager.newUser}" value="New User"
-					update="userForm" />
+					<div class="p-field p-col-12 p-md-3">
+						<p:commandButton action="#{userManager.newUser}" value="New User"
+							update="userForm" />
+					</div>
+				</div>
 			</h:panelGrid>
 		</p:panel>
 
 		<div class="userList">
 			<p:dataTable value="#{userManager.users}" var="user">
+				<f:facet name="header">List of Users</f:facet>
 				<p:column headerText="Name">
 					<h:outputText value="#{user.nameUser}" />
 				</p:column>
@@ -66,27 +82,20 @@
 					<h:outputText value="#{user.emailUser}" />
 				</p:column>
 
-				<p:column headerText="Age">
-					<h:outputText value="#{user.ageUser}" />
-				</p:column>
-
-				<p:column headerText="Login">
-					<h:outputText value="#{user.loginUser}" />
-				</p:column>
-
-				<p:column headerText="Password">
-					<h:outputText value="#{user.passwordUser}" />
-				</p:column>
-
 				<p:column headerText="Edit">
-					<h:commandLink value="Edit">
+					<h:commandLink id="editUser" immediate="true">
+						<h:graphicImage url="resources/img/edit.png"
+							style="margin-left: 40%" />
 						<f:setPropertyActionListener value="#{user}"
 							target="#{userManager.userModel}" />
+						<f:ajax execute="editUser" render="userForm" />
 					</h:commandLink>
 				</p:column>
 
 				<p:column headerText="Remove">
-					<h:commandLink value="Remove" action="#{userManager.remove}">
+					<h:commandLink immediate="true" action="#{userManager.remove}">
+						<h:graphicImage url="resources/img/remove.png"
+							style="margin-left: 40%" />
 						<f:setPropertyActionListener value="#{user}"
 							target="#{userManager.userModel}" />
 					</h:commandLink>

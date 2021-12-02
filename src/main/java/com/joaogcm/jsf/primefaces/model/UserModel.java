@@ -21,6 +21,7 @@ public class UserModel implements Serializable {
 	private String surnameUser;
 	private String emailUser;
 	private String ageUser;
+	private String genderUser;
 	private String loginUser;
 	private String passwordUser;
 
@@ -66,6 +67,14 @@ public class UserModel implements Serializable {
 
 	public void setAgeUser(String ageUser) {
 		this.ageUser = ageUser;
+	}
+
+	public String getGenderUser() {
+		return genderUser;
+	}
+
+	public void setGenderUser(String genderUser) {
+		this.genderUser = genderUser;
 	}
 
 	public String getLoginUser() {
